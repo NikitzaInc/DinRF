@@ -10,25 +10,25 @@ public class Project extends JFrame {
     public static Project nktz;
     int status = 1;
     
-    //СТАТУСЫ:
-    //1 - меню
-    //2 - карта
-    //3 - информация о регионе
-    //4 - выбор региона для сравнения 0/3
-    //5 - выбор региона для сравнения 1/3
-    //6 - выбор региона для сравнения 2/3
-    //7 - итоги сравнения
+    //STATUSES:
+    //1 - menu
+    //2 - map
+    //3 - information about the region
+    //4 - select region for comparison 0/3
+    //5 - select region for comparison 1/3
+    //6 - select region for comparison 2/3
+    //7 - comparison results
     
-    //номер региона, используется для вывода информации о регионе
+    //region number, used to display information about the region
     int regionNumber;
     
-    //массив с убылями
+    //population decline array
     int[] ubil = new int[85];
     
-    //массив с именами регионов
+    //regions' names array
     String[] imya = new String[85];
     
-    //массивы в которые записываются данные для сравнения
+    //arrays in which data is written for comparison
     int[] sravnit_ubil = new int[3];
     String[] sravnit_imya = new String[3];
     
@@ -62,16 +62,16 @@ public class Project extends JFrame {
          
     }
  public void start () {
-     //открытие карты
+     //displaying a window with a map
     status = 2;
     
 }
     public void info(){
-        //вывод окна с информацией о регионе (см. Pole.java, строка 275
+        //displaying a window with information about the region (see Pole.java, line 275)
         status = 3;
     }
  public void sravnenie(){
-            //массив с убылями
+            //population decline array
             ubil[0] = -12679;
             ubil[1] = 90630;
             ubil[2] = 93436;
@@ -160,7 +160,7 @@ public class Project extends JFrame {
 
 
 
-            //массив с именами регионов
+            //regions' names array
             imya[0] = "Белгородская обл.";
             imya[1] = "Брянская обл.";
             imya[2] = "Владимирская обл.";
@@ -250,7 +250,7 @@ public class Project extends JFrame {
 
 
 
-     //Процедура выбора для сравнения (статусы 4-6) и итогов сравнения (статус 7)
+     //Selection procedure for comparison (statuses 4-6) and comparison totals (status 7)
      status = 4;
      if (sravnit_ubil[0] != 0 && sravnit_ubil[1] == 0 && sravnit_ubil[2] == 0) {
          status = 5;

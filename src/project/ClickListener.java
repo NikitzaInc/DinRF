@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package project;
 
 
@@ -17,9 +13,8 @@ public class ClickListener implements MouseListener {
     
             
     private Project nktz;
-    //Да, я идиот. Можно было избежать создания овердохрена констант, но когда я начинал это делать,
-    //я это не понимал, а сейчас мне лень переделывать.
-    //Зато потом будет что обновлять -_-
+    //Yes, I'm an idiot. It was possible to avoid creating a lot of constants, but when I started doing this project, I didn't understand it, but now I'm too lazy to redo it.
+    //But then there will be something to update -_-
     static final int START_X1 = 490;
     static final int START_X2 = 850;
     static final int START_Y1 = 440;

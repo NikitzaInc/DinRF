@@ -15,11 +15,6 @@ public class ClickListener implements MouseListener {
     private Project nktz;
     //Yes, I'm an idiot. It was possible to avoid creating a lot of constants, but when I started doing this project, I didn't understand it, but now I'm too lazy to redo it.
     //But then there will be something to update -_-
-    static final int START_X1 = 490;
-    static final int START_X2 = 850;
-    static final int START_Y1 = 440;
-    static final int START_Y2 = 545;
-    
     static final int EXIT_X1 = 490;
     static final int EXIT_X2 = 850;
     static final int EXIT_Y1 = 555;
@@ -156,7 +151,7 @@ public class ClickListener implements MouseListener {
     // метод для проверки того что точка (x,y) находится внутри  поля 
     public static boolean insideStart(int x, int y) {
        
-        return (x > START_X1 && x < START_X2 && y > START_Y1 && y < START_Y2);
+        return (x > 490 && x < 850 && y > 440 && y < 545);
     }
     public static boolean insideExit(int x, int y) {
        

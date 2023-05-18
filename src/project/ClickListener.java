@@ -1,4 +1,3 @@
-
 package project;
 
 
@@ -13,131 +12,9 @@ public class ClickListener implements MouseListener {
     
             
     private Project nktz;
-    //Yes, I'm an idiot. It was possible to avoid creating a lot of constants, but when I started doing this project, I didn't understand it, but now I'm too lazy to redo it.
-    //But then there will be something to update -_-
-    static final int EXIT_X1 = 490;
-    static final int EXIT_X2 = 850;
-    static final int EXIT_Y1 = 555;
-    static final int EXIT_Y2 = 665;
-    
-    static final int EXIT_MAP_X1 = 1000;
-    static final int EXIT_MAP_X2 = 1265;
-    static final int EXIT_MAP_Y1 = 615;
-    static final int EXIT_MAP_Y2 = 700;
-    
-    static int REGION_INFO_EXIT_X1 = 705;
-    static int REGION_INFO_EXIT_X2 = 860;
-    static int REGION_INFO_EXIT_Y1 = 585;
-    static int REGION_INFO_EXIT_Y2 = 670;
-    
-    static final int SRAVNIT_X1 = 14;
-    static final int SRAVNIT_X2 = 260;
-    static final int SRAVNIT_Y1 = 629;
-    static final int SRAVNIT_Y2 = 698;
-   
-    static final int SRAVNIT_EXIT_X1 = 432;
-    static final int SRAVNIT_EXIT_X2 = 524;
-    static final int SRAVNIT_EXIT_Y1 = 633;
-    static final int SRAVNIT_EXIT_Y2 = 702;
-    
-    static final int SRAVNIT_INFO_EXIT_X1 = 845;
-    static final int SRAVNIT_INFO_EXIT_X2 = 997;
-    static final int SRAVNIT_INFO_EXIT_Y1 = 548;
-    static final int SRAVNIT_INFO_EXIT_Y2 = 618;
     
     static final int SRAVNIT_INFO_COUNT = 0;    
              
-    //regions
-    static final int BELGOROD_X1 = 78;
-    static final int BELGOROD_X2 = 94;
-    static final int BELGOROD_Y1 = 355;
-    static final int BELGOROD_Y2 = 364;
-    
-    static final int BRYANSK_X1 = 75;
-    static final int BRYANSK_Y1 = 316;
-    static final int BRYANSK_X2 = 92;
-    static final int BRYANSK_Y2 = 330;
-    
-    static final int VLAD_X1 = 133;
-    static final int VLAD_Y1 = 324;
-    static final int VLAD_X2 = 148;
-    static final int VLAD_Y2 = 337;
-    
-    static final int VORONEZH_X1 = 95;
-    static final int VORONEZH_Y1 = 364;
-    static final int VORONEZH_X2 = 109;
-    static final int VORONEZH_Y2 = 374;
-    
-    static final int IVAN_X1 = 149;
-    static final int IVAN_Y1 = 321;
-    static final int IVAN_X2 = 162;
-    static final int IVAN_Y2 = 332;
-    
-    static final int KALUGA_X1 = 96;
-    static final int KALUGA_Y1 = 314;
-    static final int KALUGA_X2 = 114;
-    static final int KALUGA_Y2 = 326;
-    
-    static final int KOSTROMA_X1 = 166;
-    static final int KOSTROMA_Y1 = 314;
-    static final int KOSTROMA_X2 = 180;
-    static final int KOSTROMA_Y2 = 327;
-    
-    static final int KURSK_X1 = 76;
-    static final int KURSK_Y1 = 337;
-    static final int KURSK_X2 = 95;
-    static final int KURSK_Y2 = 348;
-    
-    static final int LIPETSK_X1 = 103;
-    static final int LIPETSK_Y1 = 345;
-    static final int LIPETSK_X2 = 115;
-    static final int LIPETSK_Y2 = 354;
-    
-    static final int MOSQUA_X1 = 117;
-    static final int MOSQUA_Y1 = 322;
-    static final int MOSQUA_X2 = 133;
-    static final int MOSQUA_Y2 = 334;
-    
-    static final int ORLOVSK_X1 = 92;
-    static final int ORLOVSK_Y1 = 330;
-    static final int ORLOVSK_X2 = 102;
-    static final int ORLOVSK_Y2 = 337;
-    
-    static final int RYAZ_X1 = 121;
-    static final int RYAZ_Y1 = 338;
-    static final int RYAZ_X2 = 138;
-    static final int RYAZ_Y2 = 349;
-    
-    static final int SMOL_X1 = 88;
-    static final int SMOL_Y1 = 299;
-    static final int SMOL_X2 = 109;
-    static final int SMOL_Y2 = 312;
-    
-    static final int TAMBI_X1 =117;
-    static final int TAMBI_Y1 =354;
-    static final int TAMBI_X2 =127;
-    static final int TAMBI_Y2 =369;
-    
-    static final int TVER_X1 =115;
-    static final int TVER_Y1 =289;
-    static final int TVER_X2 =137;
-    static final int TVER_Y2 =302;
-    
-    static final int TULA_X1 =107;
-    static final int TULA_Y1 =330;
-    static final int TULA_X2 =118;
-    static final int TULA_Y2 =338;
-    
-    static final int YARIK_X1 =143;
-    static final int YARIK_Y1 =302;
-    static final int YARIK_X2 =158;
-    static final int YARIK_Y2 =314;
-    
-    static final int MSK_X1 =37;
-    static final int MSK_Y1 =285;
-    static final int MSK_X2 =87;
-    static final int MSK_Y2 =294;
-    
     
  public ClickListener(Project nktz){
      this.nktz = nktz;
@@ -148,109 +25,113 @@ public class ClickListener implements MouseListener {
         //System.out.println("Click registered: "+e.getX()+" "+ e.getY());
         System.out.println("");
     }
-    // метод для проверки того что точка (x,y) находится внутри  поля 
+    //Yes, I'm an idiot. It was possible to avoid creating a lot of functions and "if"s but when I started doing this project, I didn't understand it. 
+    //Now I dont have enough  to make it right.
+    //But then there will be something to update -_-
+    
+    //method to check if the click (x,y) was made is inside the field
     public static boolean insideStart(int x, int y) {
        
         return (x > 490 && x < 850 && y > 440 && y < 545);
     }
     public static boolean insideExit(int x, int y) {
        
-        return (x >  EXIT_X1 && x < EXIT_X2 && y > EXIT_Y1 && y < EXIT_Y2);
+        return (x >  490 && x < 850 && y > 555 && y < 665);
     }
     public static boolean insideExitMap(int x, int y) {
        
-        return (x >  EXIT_MAP_X1 && x < EXIT_MAP_X2 && y > EXIT_MAP_Y1 && y < EXIT_MAP_Y2);
+        return (x >  1000 && x < 1265 && y > 615 && y < 700);
     }
     public static boolean insideRegionInfoExit(int x, int y) {
        
-        return (x >  REGION_INFO_EXIT_X1 && x < REGION_INFO_EXIT_X2 && y > REGION_INFO_EXIT_Y1 && y < REGION_INFO_EXIT_Y2);
+        return (x >  705 && x < 860 && y > 585 && y < 670);
     }
     public static boolean insideSravnit(int x, int y) {
        
-        return (x >  SRAVNIT_X1 && x < SRAVNIT_X2 && y > SRAVNIT_Y1 && y < SRAVNIT_Y2);
+        return (x >  14 && x < 260 && y > 629 && y < 698);
     }
     public static boolean insideSravnitExit(int x, int y) {
        
-        return (x >  SRAVNIT_EXIT_X1 && x < SRAVNIT_EXIT_X2 && y > SRAVNIT_EXIT_Y1 && y < SRAVNIT_EXIT_Y2);
+        return (x >  432 && x < 524 && y > 633 && y < 702);
     }
     public static boolean insideSravnitInfoExit(int x, int y) {
        
-        return (x >  SRAVNIT_INFO_EXIT_X1 && x < SRAVNIT_INFO_EXIT_X2 && y > SRAVNIT_INFO_EXIT_Y1 && y < SRAVNIT_INFO_EXIT_Y2);
+        return (x >  845 && x < 997 && y > 548 && y < 618);
     }
     
     // для регионов
     
     public static boolean belgorod(int x, int y) {
        
-        return (x >  BELGOROD_X1 && x < BELGOROD_X2 && y > BELGOROD_Y1 && y < BELGOROD_Y2);
+        return (x >  78 && x < 94 && y > 355 && y < 364);
     }
     public static boolean bryansk(int x, int y) {
        
-        return (x >  BRYANSK_X1 && x < BRYANSK_X2 && y > BRYANSK_Y1 && y < BRYANSK_Y2);
+        return (x >  75 && x < 92 && y > 316 && y < 330);
     }
     public static boolean vlad(int x, int y) {
        
-        return (x >  VLAD_X1 && x < VLAD_X2 && y > VLAD_Y1 && y < VLAD_Y2);
+        return (x >  133 && x < 148 && y > 324 && y < 337);
     }
     public static boolean voronezh(int x, int y) {
        
-        return (x >  VORONEZH_X1 && x < VORONEZH_X2 && y > VORONEZH_Y1 && y < VORONEZH_Y2);
+        return (x >  95 && x < 109 && y > 364 && y < 374);
     }
     public static boolean ivan(int x, int y) {
        
-        return (x >  IVAN_X1 && x < IVAN_X2 && y > IVAN_Y1 && y < IVAN_Y2);
+        return (x >  149 && x < 162 && y > 321 && y < 332);
     }
     public static boolean kaluga(int x, int y) {
        
-        return (x >  KALUGA_X1 && x < KALUGA_X2 && y > KALUGA_Y1 && y < KALUGA_Y2);
+        return (x >  96 && x < 114 && y > 314 && y < 326);
     }
     public static boolean kostroma(int x, int y) {
        
-        return (x >  KOSTROMA_X1 && x < KOSTROMA_X2 && y > KOSTROMA_Y1 && y < KOSTROMA_Y2);
+        return (x >  166 && x < 180 && y > 314 && y < 327);
     }
     public static boolean kursk(int x, int y) {
        
-        return (x >  KURSK_X1 && x < KURSK_X2 && y > KURSK_Y1 && y < KURSK_Y2);
+        return (x >  76 && x < 95 && y > 337 && y < 348);
     }
     public static boolean lipetsk(int x, int y) {
        
-        return (x >  LIPETSK_X1 && x < LIPETSK_X2 && y > LIPETSK_Y1 && y < LIPETSK_Y2);
+        return (x >  103 && x < 115 && y > 345 && y < 354);
     }
     public static boolean mosqua(int x, int y) {
        
-        return (x >  MOSQUA_X1 && x < MOSQUA_X2 && y > MOSQUA_Y1 && y < MOSQUA_Y2);
+        return (x >  117 && x < 133 && y > 322 && y < 334);
     }
     public static boolean orel(int x, int y) {
        
-        return (x >  ORLOVSK_X1 && x < ORLOVSK_X2 && y > ORLOVSK_Y1 && y < ORLOVSK_Y2);
+        return (x >  92 && x < 102 && y > 330 && y < 337);
     }
     public static boolean ryaz(int x, int y) {
        
-        return (x >  RYAZ_X1 && x < RYAZ_X2 && y > RYAZ_Y1 && y < RYAZ_Y2);
+        return (x >  121 && x < 138 && y > 338 && y < 349);
     }
     public static boolean smol(int x, int y) {
        
-        return (x >  SMOL_X1 && x < SMOL_X2 && y > SMOL_Y1 && y < SMOL_Y2);
+        return (x >  88 && x < 109 && y > 299 && y < 312);
     }
     public static boolean tambi(int x, int y) {
        
-        return (x >  TAMBI_X1 && x < TAMBI_X2 && y > TAMBI_Y1 && y < TAMBI_Y2);
+        return (x >  117 && x < 127 && y > 354 && y < 369);
     }
     public static boolean tver(int x, int y) {
        
-        return (x >  TVER_X1 && x < TVER_X2 && y > TVER_Y1 && y < TVER_Y2);
+        return (x >  115 && x < 137 && y > 289 && y < 302);
     }
     public static boolean tula(int x, int y) {
        
-        return (x >  TULA_X1 && x < TULA_X2 && y > TULA_Y1 && y < TULA_Y2);
+        return (x >  107 && x < 118 && y > 330 && y < 338);
     }
     public static boolean yarik(int x, int y) {
        
-        return (x >  YARIK_X1 && x < YARIK_X2 && y > YARIK_Y1 && y < YARIK_Y2);
+        return (x >  143 && x < 158 && y > 302 && y < 314);
     }
     public static boolean msk(int x, int y) {
        
-        return (x >  MSK_X1 && x < MSK_X2 && y > MSK_Y1 && y < MSK_Y2);
+        return (x >  37 && x < 87 && y > 285 && y < 294);
     }
     public static boolean karelia(int x, int y) {
        

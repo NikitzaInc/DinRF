@@ -28,9 +28,8 @@ public class ClickListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
       boolean isOneClick = e.getClickCount() == 1;  
-    //Yes, I'm an idiot. It was possible to avoid creating a lot of "if" statements but when I started doing this project, I didn't understand it. 
-    //Now I dont have enough  to make it right.
-    //But then there will be something to update -_-
+    //I know that creating a lot of "if" statements is bad, but I learned that this way is best.
+    //https://stackoverflow.com/questions/18510360/how-to-use-greater-than-or-equal-in-a-switch-statement
     
     //method to check if the click (e.getX(),e.getY()) was made is inside the field
         

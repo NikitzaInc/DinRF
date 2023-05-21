@@ -71,7 +71,7 @@ public class Project extends JFrame {
         status = 3;
     }
  public void sravnenie(){
-            //population decline array
+            //population change array
             ubil[0] = -12679;
             ubil[1] = 90630;
             ubil[2] = 93436;
@@ -246,25 +246,23 @@ public class Project extends JFrame {
             imya[82] = "Чукотский АО";
             imya[83] = "Респ. Крым";
             imya[84] = "г. Севастополь";
-
-
-
-
-     //Selection procedure for comparison (statuses 4-6) and comparison totals (status 7)
+     
      status = 4;
+     
+     //Selection procedure for comparison (statuses 4-6) and comparison totals (status 7)
      if (sravnit_ubil[0] != 0 && sravnit_ubil[1] == 0 && sravnit_ubil[2] == 0) {
          status = 5;
          System.out.println("Region chosen, " + sravnit_imya[0]+", 1/3");
          System.out.println("Убыль в регионе: "+ sravnit_ubil[0]);
          System.out.println("Status " +status);
      }
-     if (sravnit_ubil[0] != 0 && sravnit_ubil[1] != 0 && sravnit_ubil[2] == 0) {
+     else if (sravnit_ubil[0] != 0 && sravnit_ubil[1] != 0 && sravnit_ubil[2] == 0) {
          status = 6;
          System.out.println("Region chosen, " + sravnit_imya[1]+", 2/3");
          System.out.println("Убыль в регионе: "+ sravnit_ubil[1]);
          System.out.println("Status " +status);
      }
-     if (sravnit_ubil[0] != 0 && sravnit_ubil[1] != 0 && sravnit_ubil[2] != 0) {
+     else if (sravnit_ubil[0] != 0 && sravnit_ubil[1] != 0 && sravnit_ubil[2] != 0) {
          status = 7;
          System.out.println("Region chosen, " + sravnit_imya[2]+", 3/3");
          System.out.println("Убыль в регионе: "+ sravnit_ubil[2]);

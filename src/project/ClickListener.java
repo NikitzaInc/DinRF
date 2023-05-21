@@ -95,6 +95,7 @@ public class ClickListener implements MouseListener {
         //REGIONS
         //first else if statement is used to open specific region info window
         //Second else if statement is used to choose the region for comparison
+        //I know, my code is terrible, sorry
         else if(isOneClick && e.getX() >  78 && e.getX() < 94 && e.getY() > 355 && e.getY() < 364 && nktz.status == 2){
             nktz.info();
             nktz.regionNumber = 1;

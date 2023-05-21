@@ -3,7 +3,6 @@ package project;
 
 import java.io.IOException;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 
 public class Project extends JFrame {
@@ -57,10 +56,6 @@ public class Project extends JFrame {
     }
 
     
- private static class Nktz extends JPanel{
-         JPanel pole = new Pole();
-         
-    }
  public void start () {
      //displaying a window with a map
     status = 2;

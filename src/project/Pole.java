@@ -16,13 +16,12 @@ public class Pole extends JPanel{
     public static Pole regionInfoSelect;
     
 
-    //для загрузки картинок
+    //Loading pictures
     static final String VIHOD = "/vihod.png";
     static final String REGION_INFO = "/region_info.png";
     static final String NACHAT = "/nachat.png";
     static final String MAP_VOID = "/map_void.png";
     static final String MAP_FON = "/map_fon.png";
-    static final String FLAG = "/flag_hule.png";
     static final String NAZV = "/nazv.png";
     static final String VIHOD_MAP = "/vihod_map.png";
     static final String SRAVNIT = "/sravnit.png";
@@ -31,21 +30,23 @@ public class Pole extends JPanel{
     static final String VIBOR_2 = "/vibor_2.png";
     static final String SRAVNIT_INFO = "/sravnit_info.png";
 
-    Image vihod, vihod_map, region_info, nachat, map_void, flag_hule, map_fon, nazv, sravnit, vibor_0, vibor_1, vibor_2, sravnit_info;
+    Image vihod, vihod_map, region_info, nachat, map_void, map_fon, nazv, sravnit, vibor_0, vibor_1, vibor_2, sravnit_info;
     Timer timer1;
 
-    //для оффсета названий регионов в сравнении (второе название сдвигается вниз, третье влево)
+    //For offsetting region names in comparison results if the names are too large (the second name moves down, the third one moves to the left)
+    //These ones are standart x,y
     static final int STANDART_REGION_NAME_X2 = 545;
     static final int STANDART_REGION_NAME_Y2 = 470;
     static final int STANDART_REGION_NAME_X3 = 775;
     static final int STANDART_REGION_NAME_Y3 = 470;
     
+    //These ones for offsetting
     static final int BIG_REGION_NAME_X2 = 505;
     static final int BIG_REGION_NAME_Y2 = 527;
     static final int BIG_REGION_NAME_X3 = 749;
     static final int BIG_REGION_NAME_Y3 = 470;
     
-    //Для определения длины столбиков в сравнении
+    //For determination the length of the columns in comparison
     int naibol = 0;
     int max_length;
     int length = 0;
@@ -53,13 +54,12 @@ public class Pole extends JPanel{
     
      Pole() {
 
-        //для загрузки картинок
+        //Loading pictures into our window (field)
         vihod = kartinki.loadResourceImage(VIHOD);
         region_info = kartinki.loadResourceImage(REGION_INFO);
         nachat = kartinki.loadResourceImage(NACHAT);
         map_void = kartinki.loadResourceImage(MAP_VOID);
         map_fon = kartinki.loadResourceImage(MAP_FON);
-        flag_hule = kartinki.loadResourceImage(FLAG);
         nazv = kartinki.loadResourceImage(NAZV);
         vihod_map = kartinki.loadResourceImage(VIHOD_MAP);
         sravnit = kartinki.loadResourceImage(SRAVNIT);
@@ -72,40 +72,39 @@ public class Pole extends JPanel{
         timer1.start();
 
     }
-     //Отрисовывание всякого на экране
+     //Drawing our elements
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        //статус = 1, отрисовывается фон, название, кнопки
+        //When status = 7, program should draw background, title, buttons
         if (nktz.status == 1){
         g.drawImage(map_fon, 120, 50, this);
         g.drawImage(nazv, 200, -10, this);
-        //g.drawImage(flag_hule, 970, 430, this);  - решил флаг не делать, какой-то кринж получается
         g.drawImage(vihod, 480, 520, this);
         g.drawImage(nachat, 480, 400, this);
         }
         
-        //статусы 2-7, отрисовывание выхода с карты, самой карты, кнопки сравнения
+        //When status = 2-7, program should draw the exit button from the map, the map itself, the compare button
         if (nktz.status > 1){
             g.drawImage(map_void, 0, -80, this);
             g.drawImage(vihod_map, 995, 595, this);
             g.drawImage(sravnit, 0, 595, this);
         }
         
-        //статусы 4-6, выбор региона для сравнения (статус 4 - ни один не выбран, 5 - 1 выбран, 6 - выбраны 2 региона)
-        if (nktz.status == 4){
+        //When status = 4-6, program should draw level of region selection for comparison (status 4 - none selected, 5 - 1 selected, 6 - 2 regions selected)
+        else if (nktz.status == 4){
             g.drawImage(vibor_0, 0, 595, this);
         }
-        if (nktz.status == 5){
+        else if (nktz.status == 5){
             g.drawImage(vibor_1, 0, 595, this);
         }
-        if (nktz.status == 6){
+        else if (nktz.status == 6){
             g.drawImage(vibor_2, 0, 595, this);
         }
         
-        //статус 7, окно сравнения
+        //When status = 7, program should calculate and show comparison results
         if (nktz.status == 7){
-            //отрисовка окна, названий, самой диаграммы
+            //Drawing the window, titles, the chart itself
             g.drawImage(sravnit_info, 250, 50, this);
             g.setFont(new Font("serif", 1, 22));
             g.drawString(nktz.sravnit_imya[0], 290, 470);
@@ -118,7 +117,7 @@ public class Pole extends JPanel{
             }
             g.setFont(new Font("serif", 1, 22));
             
-            //если 1 из заявленных в сравнение убылей равна вот этим числам, названия сдвигаются(оффсет названий, смотри выше)
+            //If 1 of the population changes claimed in the comparison is equal to these numbers, the names are shifted (name offset, see above)
             if (nktz.sravnit_ubil[0] == 18013 || nktz.sravnit_ubil[1] == 18013 || nktz.sravnit_ubil[2] == 18013 || nktz.sravnit_ubil[0] == 12416 || nktz.sravnit_ubil[1] == 12416 || nktz.sravnit_ubil[2] == 12416 || nktz.sravnit_ubil[0] == -73695 || nktz.sravnit_ubil[1] == -73695 || nktz.sravnit_ubil[2] == -73695 || nktz.sravnit_ubil[0] == -8832 || nktz.sravnit_ubil[1] == -8832 || nktz.sravnit_ubil[2] == -8832 || nktz.sravnit_ubil[0] == -148922 || nktz.sravnit_ubil[1] == -148922 || nktz.sravnit_ubil[2] == -148922 || nktz.sravnit_ubil[0] == 19156 || nktz.sravnit_ubil[1] == 19156 || nktz.sravnit_ubil[2] == 19156){
                 
                 g.drawString(nktz.sravnit_imya[1], BIG_REGION_NAME_X2, BIG_REGION_NAME_Y2);
@@ -158,7 +157,7 @@ public class Pole extends JPanel{
             }
             
             
-            //определение наибольшей убыли
+            //determination of the largest population change
             if (nktz.sravnit_ubil[0] > 0 && nktz.sravnit_ubil[1] > 0 &&nktz.sravnit_ubil[2] > 0){
                 if (nktz.sravnit_ubil[0]>nktz.sravnit_ubil[1]){
                     naibol = nktz.sravnit_ubil[0];
@@ -168,7 +167,7 @@ public class Pole extends JPanel{
             if (naibol < nktz.sravnit_ubil[2]){
                     naibol = nktz.sravnit_ubil[2];
                 }
-            //отрисовка столбика наибольшей убыли
+            //Drawing the column for largest population change
                 g.drawLine(300, 425, 960, 425);
                 g.drawLine(300, 425, 300, 130);
                 g.setFont(new Font("serif", 1, 12));
@@ -179,7 +178,8 @@ public class Pole extends JPanel{
                 BigDecimal firstValue;
                 BigDecimal secondValue;
                 
-                //определение длины столбиков других убылей относительно наибольшей
+                //Determination of the length of the columns of other population changes relative to the largest
+                //It may be hard to read and understand, sorry, I'll describe all the process later
                 firstValue = new BigDecimal(nktz.sravnit_ubil[0]);
                 secondValue = new BigDecimal(naibol);
                 otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
@@ -204,7 +204,7 @@ public class Pole extends JPanel{
                 g.setColor(Color.blue);
                 g.fillRect(830, 425-(length), 60, length);
             }
-            //если есть не только убыль, но и прирост, всё тоже самое, но длина наибольшего столбика меньше и всё отрисовывается относительно другой координаты
+            //If there is not only a decrease, but also an increase, everything is the same, but the length of the largest column is less and everything is drawn relative to a different coordinate
             if (nktz.sravnit_ubil[0] < 0 || nktz.sravnit_ubil[1] < 0 || nktz.sravnit_ubil[2] < 0){
                 g.drawLine(300, 425, 300, 130);
                 g.drawLine(300, 280, 960, 280);
@@ -272,13 +272,15 @@ public class Pole extends JPanel{
             
             
         }
-        //оотрисовка окна информации о регионе
+        //Drawing region info window
         if (nktz.status == 3 && nktz.regionNumber > 0){
             g.drawImage(region_info, 505, 100, this);
 
         }
-        //РЕГИОНЫ
-        //тут описание и убыль 85 регионов, население которых было в документах переписей 2010 и 2020
+        //REGIONS
+        //Here are descriptions and population changes of 85 regions whose population was in the 2010 and 2020 census documents
+        //Sometimes I hate myself for not knowing how to make some things easier and better
+        //TODO remake this part with switch-case
         if (nktz.status == 3 && nktz.regionNumber == 1){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Белгородская область", 535, 170);
@@ -298,7 +300,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1545205 чел.", 530, 415);
             g.drawString("Прирост населения: 12679 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 2){
+        else if (nktz.status == 3 && nktz.regionNumber == 2){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Брянская область", 555, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -312,7 +314,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1187587 чел.", 530, 340);
             g.drawString("Убыль населения: 90630 чел.", 530, 365);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 3){
+        else if (nktz.status == 3 && nktz.regionNumber == 3){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Владимирская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -330,7 +332,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1342099 чел.", 530, 400);
             g.drawString("Убыль населения: 101594 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 4){
+        else if (nktz.status == 3 && nktz.regionNumber == 4){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Воронежская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -346,7 +348,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2305608 чел.", 530, 370);
             g.drawString("Убыль населения: 29772 чел.", 530, 395);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 5){
+        else if (nktz.status == 3 && nktz.regionNumber == 5){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ивановская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -362,7 +364,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 992083 чел.", 530, 370);
             g.drawString("Убыль населения: 69568 чел.", 530, 395);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 6){
+        else if (nktz.status == 3 && nktz.regionNumber == 6){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Калужская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -380,7 +382,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1001777 чел.", 530, 400);
             g.drawString("Убыль населения: 9153 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 7){
+        else if (nktz.status == 3 && nktz.regionNumber == 7){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Костромская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -397,7 +399,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 630904 чел.", 530, 385);
             g.drawString("Убыль населения: 36658 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 8){
+        else if (nktz.status == 3 && nktz.regionNumber == 8){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Курская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -413,7 +415,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1100248 чел.", 530, 370);
             g.drawString("Убыль населения: 26833 чел.", 530, 395);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 9){
+        else if (nktz.status == 3 && nktz.regionNumber == 9){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ли́пецкая область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -430,7 +432,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1133782 чел.", 530, 385);
             g.drawString("Убыль населения: 39731 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 10){
+        else if (nktz.status == 3 && nktz.regionNumber == 10){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Моско́вская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -449,7 +451,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 7699681 чел.", 530, 415);
             g.drawString("Прирост населения: 604 561 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 11){
+        else if (nktz.status == 3 && nktz.regionNumber == 11){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Орло́вская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -465,7 +467,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 729092 чел.", 530, 370);
             g.drawString("Убыль населения: 57 843 чел.", 530, 395);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 12){
+        else if (nktz.status == 3 && nktz.regionNumber == 12){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ряза́нская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -481,7 +483,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1103552 чел.", 530, 385);
             g.drawString("Убыль населения: 50 562 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 13){
+        else if (nktz.status == 3 && nktz.regionNumber == 13){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Cмоленская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -497,7 +499,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 928008 чел.", 530, 385);
             g.drawString("Убыль населения: 57 529 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 14){
+        else if (nktz.status == 3 && nktz.regionNumber == 14){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Тамбовская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -513,7 +515,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1000584 чел.", 530, 385);
             g.drawString("Убыль населения: 91 410 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 15){
+        else if (nktz.status == 3 && nktz.regionNumber == 15){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Тверская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -530,7 +532,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1252999 чел.", 530, 500);
             g.drawString("Убыль населения: 100393 чел.", 530, 525);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 16){
+        else if (nktz.status == 3 && nktz.regionNumber == 16){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Тульская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -546,7 +548,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1457621 чел.", 530, 385);
             g.drawString("Убыль населения: 96304 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 17){
+        else if (nktz.status == 3 && nktz.regionNumber == 17){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ярославская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -563,7 +565,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1247407 чел.", 530, 400);
             g.drawString("Убыль населения: 25061 чел.", 530, 435);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 18){
+        else if (nktz.status == 3 && nktz.regionNumber == 18){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("г. Москва", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -582,7 +584,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 12666565 чел.", 530, 430);
             g.drawString("Прирост населения: 1163064 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 19){
+        else if (nktz.status == 3 && nktz.regionNumber == 19){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Карелия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -598,7 +600,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 611567 чел.", 530, 385);
             g.drawString("Убыль населения: 31981 чел.", 530, 410);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 20){
+        else if (nktz.status == 3 && nktz.regionNumber == 20){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Республика Коми", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -616,7 +618,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 817032 чел.", 530, 415);
             g.drawString("Убыль населения: 84157 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 21){
+        else if (nktz.status == 3 && nktz.regionNumber == 21){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Архангельская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -633,7 +635,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1131793 чел.", 530, 400);
             g.drawString("Убыль населения: 95833 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 22){
+        else if (nktz.status == 3 && nktz.regionNumber == 22){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ненецкий АО", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -651,7 +653,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 44250 чел.", 530, 415);
             g.drawString("Прирост населения: 2160 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 23){
+        else if (nktz.status == 3 && nktz.regionNumber == 23){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Волого́дская о́бласть", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -669,7 +671,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1155744 чел.", 530, 415);
             g.drawString("Убыль населения: 46700 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 24){
+        else if (nktz.status == 3 && nktz.regionNumber == 24){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Калининградская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -687,7 +689,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1015568 чел.", 530, 415);
             g.drawString("Прирост населения: 73695 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 25){
+        else if (nktz.status == 3 && nktz.regionNumber == 25){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ленинградская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -704,7 +706,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1884292 чел.", 530, 400);
             g.drawString("Прирост населения: 167424 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 26){
+        else if (nktz.status == 3 && nktz.regionNumber == 26){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Мурманская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -721,7 +723,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 737134 чел.", 530, 400);
             g.drawString("Убыль населения: 58275 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 27){
+        else if (nktz.status == 3 && nktz.regionNumber == 27){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Новгородская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -738,7 +740,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 594461 чел.", 530, 400);
             g.drawString("Убыль населения: 39650 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 28){
+        else if (nktz.status == 3 && nktz.regionNumber == 28){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Псковская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -756,7 +758,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 623182 чел.", 530, 415);
             g.drawString("Убыль населения: 50241 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 29){
+        else if (nktz.status == 3 && nktz.regionNumber == 29){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Санкт-Петербург", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -774,7 +776,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 5391203 чел.", 530, 415);
             g.drawString("Прирост населения: 511637 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 30){
+        else if (nktz.status == 3 && nktz.regionNumber == 30){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Адыгея", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -791,7 +793,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 463128 чел.", 530, 400);
             g.drawString("Прирост населения: 23132 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 31){
+        else if (nktz.status == 3 && nktz.regionNumber == 31){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Калмыкия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -809,7 +811,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 270560 чел.", 530, 415);
             g.drawString("Убыль населения: 18921 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 32){
+        else if (nktz.status == 3 && nktz.regionNumber == 32){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Краснодарский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -827,7 +829,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 5679704 чел.", 530, 415);
             g.drawString("Прирост населения: 453057 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 33){
+        else if (nktz.status == 3 && nktz.regionNumber == 33){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Астраханская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -844,7 +846,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1001780 чел.", 530, 400);
             g.drawString("Убыль населения: 8293 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 34){
+        else if (nktz.status == 3 && nktz.regionNumber == 34){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Волгоградская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -864,7 +866,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2482796 чел.", 530, 445);
             g.drawString("Убыль населения: 127365 чел.", 530, 470);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 35){
+        else if (nktz.status == 3 && nktz.regionNumber == 35){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ростовская область", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -881,7 +883,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 4189653 чел.", 530, 400);
             g.drawString("Убыль населения: 88323 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 36){
+        else if (nktz.status == 3 && nktz.regionNumber == 36){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Республика Дагестан", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -899,7 +901,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 3122080 чел.", 530, 415);
             g.drawString("Прирост населения: 211831 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 37){
+        else if (nktz.status == 3 && nktz.regionNumber == 37){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Республика Ингушетия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -917,7 +919,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 511313 чел.", 530, 415);
             g.drawString("Прирост населения: 98784 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 38){
+        else if (nktz.status == 3 && nktz.regionNumber == 38){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Кабардино-Балкария", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -935,7 +937,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 868771 чел.", 530, 415);
             g.drawString("Прирост населения: 8832 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 39){
+        else if (nktz.status == 3 && nktz.regionNumber == 39){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Карачаево-Черкессия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -953,7 +955,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 465443 чел.", 530, 415);
             g.drawString("Убыль населения: 12416 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 40){
+        else if (nktz.status == 3 && nktz.regionNumber == 40){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Северная Осетия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -972,7 +974,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 694967 чел.", 530, 430);
             g.drawString("Убыль населения: 18013 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 41){
+        else if (nktz.status == 3 && nktz.regionNumber == 41){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Чеченская республика", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -990,7 +992,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1488359 чел.", 530, 415);
             g.drawString("Прирост населения: 219370 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 42){
+        else if (nktz.status == 3 && nktz.regionNumber == 42){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ставропольский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1008,7 +1010,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2798184 чел.", 530, 415);
             g.drawString("Прирост населения: 11903 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 43){
+        else if (nktz.status == 3 && nktz.regionNumber == 43){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Башкортостан", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1026,7 +1028,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 4025968 чел.", 530, 415);
             g.drawString("Убыль населения: 46324 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 44){
+        else if (nktz.status == 3 && nktz.regionNumber == 44){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Марий Эл", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1045,7 +1047,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 677375 чел.", 530, 430);
             g.drawString("Убыль населения: 19084 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 45){
+        else if (nktz.status == 3 && nktz.regionNumber == 45){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Мордовия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1063,7 +1065,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 784581 чел.", 530, 415);
             g.drawString("Убыль населения: 50174 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 46){
+        else if (nktz.status == 3 && nktz.regionNumber == 46){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Татарстан", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1081,7 +1083,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 3898504 чел.", 530, 415);
             g.drawString("Прирост населения: 112016 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 47){
+        else if (nktz.status == 3 && nktz.regionNumber == 47){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Удмуртская респ.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1098,7 +1100,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1497156 чел.", 530, 400);
             g.drawString("Убыль населения: 24264 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 48){
+        else if (nktz.status == 3 && nktz.regionNumber == 48){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Чувашская респ.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1116,7 +1118,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1212847 чел.", 530, 415);
             g.drawString("Убыль населения: 38772 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 49){
+        else if (nktz.status == 3 && nktz.regionNumber == 49){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Пермский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1134,7 +1136,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2589261 чел.", 530, 415);
             g.drawString("Убыль населения: 46015 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 50){
+        else if (nktz.status == 3 && nktz.regionNumber == 50){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Кировская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1154,7 +1156,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1256287 чел.", 530, 445);
             g.drawString("Убыль населения: 85025 чел.", 530, 470);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 51){
+        else if (nktz.status == 3 && nktz.regionNumber == 51){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Нижегородская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1173,7 +1175,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 3189749 чел.", 530, 430);
             g.drawString("Убыль населения: 120848 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 52){
+        else if (nktz.status == 3 && nktz.regionNumber == 52){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Оренбургская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1191,7 +1193,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1949875 чел.", 530, 415);
             g.drawString("Убыль населения: 83197 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 53){
+        else if (nktz.status == 3 && nktz.regionNumber == 53){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Пензенская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1209,7 +1211,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1298230 чел.", 530, 415);
             g.drawString("Убыль населения: 87956 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 54){
+        else if (nktz.status == 3 && nktz.regionNumber == 54){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Самарская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1227,7 +1229,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 3166848 чел.", 530, 415);
             g.drawString("Убыль населения: 48684 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 55){
+        else if (nktz.status == 3 && nktz.regionNumber == 55){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Саратовская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1246,7 +1248,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2408503 чел.", 530, 430);
             g.drawString("Убыль населения: 113389 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 56){
+        else if (nktz.status == 3 && nktz.regionNumber == 56){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ульяновская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1265,7 +1267,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1224071 чел.", 530, 430);
             g.drawString("Убыль населения: 68728 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 57){
+        else if (nktz.status == 3 && nktz.regionNumber == 57){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Курганская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1283,7 +1285,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 822868 чел.", 530, 415);
             g.drawString("Убыль населения: 87939 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 58){
+        else if (nktz.status == 3 && nktz.regionNumber == 58){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Свердловская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1303,7 +1305,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 4300374 чел.", 530, 445);
             g.drawString("Прирост населения: 2627 чел.", 530, 470);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 59){
+        else if (nktz.status == 3 && nktz.regionNumber == 59){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Тюменская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1323,7 +1325,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 3767295 чел.", 530, 445);
             g.drawString("Прирост населения: 371540 чел.", 530, 470);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 60){
+        else if (nktz.status == 3 && nktz.regionNumber == 60){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ханты-Мансийский АО ", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1342,7 +1344,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1681165 чел.", 530, 430);
             g.drawString("Прирост населения: 148922 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 61){
+        else if (nktz.status == 3 && nktz.regionNumber == 61){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Ямало-Ненецкий АО", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1360,7 +1362,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 545727 чел.", 530, 415);
             g.drawString("Прирост населения: 22823 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 62){
+        else if (nktz.status == 3 && nktz.regionNumber == 62){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Челябинская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1378,7 +1380,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 3454589 чел.", 530, 415);
             g.drawString("Убыль населения: 21628 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 63){
+        else if (nktz.status == 3 && nktz.regionNumber == 63){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Алтай", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1396,7 +1398,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 220568 чел.", 530, 415);
             g.drawString("Прирост населения: 14400 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 64){
+        else if (nktz.status == 3 && nktz.regionNumber == 64){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Бурятия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1414,7 +1416,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 985684 чел.", 530, 415);
             g.drawString("Прирост населения: 13663 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 65){
+        else if (nktz.status == 3 && nktz.regionNumber == 65){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Тыва", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1432,7 +1434,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 328875 чел.", 530, 415);
             g.drawString("Прирост населения: 20945 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 66){
+        else if (nktz.status == 3 && nktz.regionNumber == 66){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Хакасия", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1450,7 +1452,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 533149 чел.", 530, 415);
             g.drawString("Прирост населения: 746 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 67){
+        else if (nktz.status == 3 && nktz.regionNumber == 67){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Алтайский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1468,7 +1470,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2306753 чел.", 530, 415);
             g.drawString("Убыль населения: 113002 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 68){
+        else if (nktz.status == 3 && nktz.regionNumber == 68){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Забайкальский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1486,7 +1488,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1056592 чел.", 530, 415);
             g.drawString("Убыль населения: 50515 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 69){
+        else if (nktz.status == 3 && nktz.regionNumber == 69){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Красноярский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1505,7 +1507,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2861077 чел.", 530, 430);
             g.drawString("Прирост населения: 32890 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 70){
+        else if (nktz.status == 3 && nktz.regionNumber == 70){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Иркутская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1523,7 +1525,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2383107 чел.", 530, 415);
             g.drawString("Убыль населения: 45643 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 71){
+        else if (nktz.status == 3 && nktz.regionNumber == 71){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Кемеровская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1541,7 +1543,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2645650 чел.", 530, 415);
             g.drawString("Убыль населения: 117485 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 72){
+        else if (nktz.status == 3 && nktz.regionNumber == 72){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Новосибирская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1559,7 +1561,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 2792003 чел.", 530, 415);
             g.drawString("Прирост населения: 126092 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 73){
+        else if (nktz.status == 3 && nktz.regionNumber == 73){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Омская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1577,7 +1579,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1915170 чел.", 530, 415);
             g.drawString("Убыль населения: 62495 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 74){
+        else if (nktz.status == 3 && nktz.regionNumber == 74){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Томская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1595,7 +1597,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1074805 чел.", 530, 415);
             g.drawString("Прирост населения: 27411 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 75){
+        else if (nktz.status == 3 && nktz.regionNumber == 75){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Саха (Якутия)", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1613,7 +1615,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 976983 чел.", 530, 415);
             g.drawString("Прирост населения: 18455 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 76){
+        else if (nktz.status == 3 && nktz.regionNumber == 76){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Камчатский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1630,7 +1632,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 312342 чел.", 530, 400);
             g.drawString("Убыль населения: 9737 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 77){
+        else if (nktz.status == 3 && nktz.regionNumber == 77){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Приморский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1648,7 +1650,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1886856 чел.", 530, 415);
             g.drawString("Убыль населения: 69641 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 78){
+        else if (nktz.status == 3 && nktz.regionNumber == 78){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Хабаровский край", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1666,7 +1668,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1308385 чел.", 530, 415);
             g.drawString("Убыль населения: 35484 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 79){
+        else if (nktz.status == 3 && nktz.regionNumber == 79){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Амурская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1684,7 +1686,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 785945 чел.", 530, 415);
             g.drawString("Убыль населения: 44158 чел.", 530, 440);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 80){
+        else if (nktz.status == 3 && nktz.regionNumber == 80){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Магаданская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1701,7 +1703,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 139592 чел.", 530, 400);
             g.drawString("Убыль населения: 17404 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 81){
+        else if (nktz.status == 3 && nktz.regionNumber == 81){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Сахалинская обл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1718,7 +1720,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 486939 чел.", 530, 400);
             g.drawString("Убыль населения: 11034 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 82){
+        else if (nktz.status == 3 && nktz.regionNumber == 82){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Еврейская АОбл.", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1735,7 +1737,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 157402 чел.", 530, 400);
             g.drawString("Убыль населения: 19156 чел.", 530, 425);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 83){
+        else if (nktz.status == 3 && nktz.regionNumber == 83){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Чукотский АО", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1753,8 +1755,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 49908 чел.", 530, 415);
             g.drawString("Убыль населения: 618 чел.", 530, 440);
         }
-        //население крыма, севастополя в 2010 с трудом откопал с впн на каком-то украинском сайте
-        if (nktz.status == 3 && nktz.regionNumber == 84){
+        else if (nktz.status == 3 && nktz.regionNumber == 84){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("Респ. Крым", 530, 170);
             g.setFont(new Font("serif", 1, 17));
@@ -1773,7 +1774,7 @@ public class Pole extends JPanel{
             g.drawString("Население в 2020 г. : 1934630 чел.", 530, 430);
             g.drawString("Прирост населения: 27530 чел.", 530, 455);
         }
-        if (nktz.status == 3 && nktz.regionNumber == 85){
+        else if (nktz.status == 3 && nktz.regionNumber == 85){
             g.setFont(new Font("serif", 1, 30));
             g.drawString("г. Севастополь", 530, 170);
             g.setFont(new Font("serif", 1, 17));

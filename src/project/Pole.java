@@ -16,7 +16,7 @@ public class Pole extends JPanel{
     public static Pole regionInfoSelect;
     
 
-    //Loading pictures
+    //These ones for png files
     static final String VIHOD = "/vihod.png";
     static final String REGION_INFO = "/region_info.png";
     static final String NACHAT = "/nachat.png";
@@ -92,13 +92,13 @@ public class Pole extends JPanel{
         }
         
         //When status = 4-6, program should draw level of region selection for comparison (status 4 - none selected, 5 - 1 selected, 6 - 2 regions selected)
-        else if (nktz.status == 4){
+        if (nktz.status == 4){
             g.drawImage(vibor_0, 0, 595, this);
         }
-        else if (nktz.status == 5){
+        if (nktz.status == 5){
             g.drawImage(vibor_1, 0, 595, this);
         }
-        else if (nktz.status == 6){
+        if (nktz.status == 6){
             g.drawImage(vibor_2, 0, 595, this);
         }
         

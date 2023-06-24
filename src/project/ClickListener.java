@@ -1,28 +1,19 @@
 package project;
-
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
 public class ClickListener implements MouseListener {
-    public static ClickListener regInfo;
-    
-    
-    
-            
+    public static ClickListener regInfo;       
     private Project nktz;
-    
     static final int SRAVNIT_INFO_COUNT = 0;    
              
-    
  public ClickListener(Project nktz){
      this.nktz = nktz;
  }
 
    @Override
     public void mouseClicked(MouseEvent e) {
-        //System.out.println("Click registered: "+e.getX()+" "+ e.getY());
         System.out.println("");
     }
     @Override
@@ -1141,18 +1132,4 @@ public class ClickListener implements MouseListener {
             nktz.start();
         }
     }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-      
-    }
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-    @Override
-    public void mouseExited(MouseEvent e) {
-   
-    }
-    
 }

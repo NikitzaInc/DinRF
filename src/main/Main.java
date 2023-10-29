@@ -1,10 +1,6 @@
-
 package main;
 
 import javax.swing.JFrame;
-
-
-
 public class Main extends JFrame {
     public static Main frame;
     int status = 1;

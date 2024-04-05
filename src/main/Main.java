@@ -25,7 +25,7 @@ public class Main extends JFrame {
     int[] compareChange = new int[3];
     String[] compareName = new String[3];
 
-    private static ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
     RegionsData[] regions;
 
     {
@@ -54,11 +54,9 @@ public class Main extends JFrame {
      pole.setLayout(null);
  }
 
-    
  public void start () {
      //displaying a window with a map
     status = 2;
-    
 }
 public void info(){
      //displaying a window with information about the region (see Pole.java, line 275)

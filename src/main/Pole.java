@@ -47,7 +47,7 @@ public class Pole extends JPanel{
     int maxChange = 0;
     int max_length;
     int length = 0;
-    double okruglenie_2;
+    double rounded;
 
     Font mainFont = new Font("serif", Font.BOLD, 17);
     Font bigFont = new Font("serif", Font.BOLD, 22);
@@ -155,7 +155,7 @@ public class Pole extends JPanel{
                 g.drawString("Убыль",285,120);
 
                 max_length = 240;
-                BigDecimal otnoshenie;
+                BigDecimal coefficient;
                 BigDecimal firstValue;
                 BigDecimal secondValue;
 
@@ -163,23 +163,23 @@ public class Pole extends JPanel{
                 //It may be hard to read and understand, sorry, I'll describe all the process later
                 firstValue = new BigDecimal(frame.compareChange[0]);
                 secondValue = new BigDecimal(maxChange);
-                otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
-                okruglenie_2 = otnoshenie.doubleValue();
-                length = (int) Math.round(okruglenie_2*max_length);
+                coefficient = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
+                rounded = coefficient.doubleValue();
+                length = (int) Math.round(rounded*max_length);
                 g.setColor(Color.red);
                 g.fillRect(330, 425-length, 60, length);
 
                 firstValue = new BigDecimal(frame.compareChange[1]);
-                otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
-                okruglenie_2 = otnoshenie.doubleValue();
-                length = (int) Math.round(okruglenie_2*max_length);
+                coefficient = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
+                rounded = coefficient.doubleValue();
+                length = (int) Math.round(rounded*max_length);
                 g.setColor(Color.green);
                 g.fillRect(600, 425-length, 60, length);
 
                 firstValue = new BigDecimal(frame.compareChange[2]);
-                otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
-                okruglenie_2 = otnoshenie.doubleValue();
-                length = (int) Math.round(okruglenie_2*max_length);
+                coefficient = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
+                rounded = coefficient.doubleValue();
+                length = (int) Math.round(rounded*max_length);
                 g.setColor(Color.blue);
                 g.fillRect(830, 425-(length), 60, length);
             }
@@ -200,15 +200,15 @@ public class Pole extends JPanel{
                 maxChange = Math.max(maxChange, sravnit_ubil_mod[2]);
 
                 max_length = 120;
-                BigDecimal otnoshenie;
+                BigDecimal coefficient;
                 BigDecimal firstValue;
                 BigDecimal secondValue;
 
                 firstValue = new BigDecimal(sravnit_ubil_mod[0]);
                 secondValue = new BigDecimal(maxChange);
-                otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
-                okruglenie_2 = otnoshenie.doubleValue();
-                length = (int) Math.round(okruglenie_2*max_length);
+                coefficient = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
+                rounded = coefficient.doubleValue();
+                length = (int) Math.round(rounded*max_length);
                 g.setColor(Color.red);
                 if (frame.compareChange[0] > 0){
                     g.fillRect(330, 280, 60, length);
@@ -218,9 +218,9 @@ public class Pole extends JPanel{
 
                 firstValue = new BigDecimal(sravnit_ubil_mod[1]);
                 secondValue = new BigDecimal(maxChange);
-                otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
-                okruglenie_2 = otnoshenie.doubleValue();
-                length = (int) Math.round(okruglenie_2*max_length);
+                coefficient = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
+                rounded = coefficient.doubleValue();
+                length = (int) Math.round(rounded*max_length);
                 g.setColor(Color.green);
                 if (frame.compareChange[1] > 0){
                     g.fillRect(600, 280, 60, length);
@@ -230,9 +230,9 @@ public class Pole extends JPanel{
 
                 firstValue = new BigDecimal(sravnit_ubil_mod[2]);
                 secondValue = new BigDecimal(maxChange);
-                otnoshenie = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
-                okruglenie_2 = otnoshenie.doubleValue();
-                length = (int) Math.round(okruglenie_2*max_length);
+                coefficient = firstValue.divide(secondValue, 2, RoundingMode.DOWN);
+                rounded = coefficient.doubleValue();
+                length = (int) Math.round(rounded*max_length);
                 g.setColor(Color.blue);
                 if (frame.compareChange[2] > 0){
                     g.fillRect(830, 280, 60, length);

@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-
 import static main.Main.frame;
 
 public class Pole extends JPanel{
@@ -30,7 +29,9 @@ public class Pole extends JPanel{
 
     Timer timer1;
 
-    //For offsetting region names in comparison results if the names are too large (the second name moves down, the third one moves to the left)
+    //For offsetting region names in comparison results if the names are too large
+    //(the second name moves down, the third one moves to the left)
+
     //These are standard x,y
     static final int STANDART_REGION_NAME_X2 = 545;
     static final int STANDART_REGION_NAME_Y2 = 470;
@@ -103,8 +104,8 @@ public class Pole extends JPanel{
             }
             g.setFont(bigFont);
 
-            //If 1 of the population changes claimed in the comparison is equal to these numbers, the names are shifted (name offset, see above)
-            if (frame.compareChange[0] == 18013 || frame.compareChange[1] == 18013 || frame.compareChange[2] == 18013 || frame.compareChange[0] == 12416 || frame.compareChange[1] == 12416 || frame.compareChange[2] == 12416 || frame.compareChange[0] == -73695 || frame.compareChange[1] == -73695 || frame.compareChange[2] == -73695 || frame.compareChange[0] == -8832 || frame.compareChange[1] == -8832 || frame.compareChange[2] == -8832 || frame.compareChange[0] == -148922 || frame.compareChange[1] == -148922 || frame.compareChange[2] == -148922 || frame.compareChange[0] == 19156 || frame.compareChange[1] == 19156 || frame.compareChange[2] == 19156){
+            //If one of the names are big, the grid for names are shifted (name offset, see above)
+            if (isBig(frame.compareChange[0]) || isBig(frame.compareChange[1]) || isBig(frame.compareChange[2])) {
 
                 g.drawString(frame.compareName[1], BIG_REGION_NAME_X2, BIG_REGION_NAME_Y2);
                 g.drawString(frame.compareName[2], BIG_REGION_NAME_X3, BIG_REGION_NAME_Y3);
@@ -183,7 +184,8 @@ public class Pole extends JPanel{
                 g.setColor(Color.blue);
                 g.fillRect(830, 425-(length), 60, length);
             }
-            //If there is not only a decrease, but also an increase, everything is the same, but the length of the largest column is less and everything is drawn relative to a different coordinate
+            // If there is not only a decrease, but also an increase, everything is the same, but the length
+            // of the largest column is less and everything is drawn relative to a different coordinate
             if (frame.compareChange[0] < 0 || frame.compareChange[1] < 0 || frame.compareChange[2] < 0){
                 g.drawLine(300, 425, 300, 130);
                 g.drawLine(300, 280, 960, 280);
@@ -257,5 +259,16 @@ public class Pole extends JPanel{
             g.drawString(line, x, y);
             y += lineHeight;
         }
+    }
+
+    private Boolean isBig(int change){
+         int[] bigChanges = {18013, 12416, -73695, -8832, -148922, 19156};
+
+         for (int bigChange : bigChanges){
+             if (change == bigChange){
+                 return true;
+             }
+         }
+         return false;
     }
 }

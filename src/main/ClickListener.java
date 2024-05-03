@@ -2,12 +2,12 @@ package main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import static main.Main.frame;
+
 public class ClickListener implements MouseListener {
-    private final Main frame;
 
     public ClickListener(Main frame){
-     this.frame = frame;
- }
+    }
 
    @Override
     public void mouseClicked(MouseEvent e) {
